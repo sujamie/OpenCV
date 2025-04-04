@@ -103,25 +103,111 @@ cv2.destroyAllWindows()
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h1>
+<h1>imwrite() 寫入並儲存圖片 <h1>
 
 </summary>
+
+``` python
+import cv2
+img = cv2.imread('lenna.jpg', cv2.IMREAD_GRAYSCALE)   # 以灰階模式開啟圖片
+cv2.imwrite('oxxostudio_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])  # 存成 jpg
+cv2.imwrite('oxxostudio_3.png', img)  # 存成 png
+```
 
 </details>
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h1>
+<h1>VideoCapture() 讀取攝影鏡頭、開啟影片<h1>
+  
 
 </summary>
+cap = cv2.VideoCapture(0)         # 讀取攝影鏡頭
+  
+ap = cv2.VideoCapture('影片路徑') # 讀取電腦中的影片
 
+``` python
+import cv2
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()             # 讀取影片的每一幀
+    if not ret:
+        print("Cannot receive frame")   # 如果讀取錯誤，印出訊息
+        break
+    cv2.imshow('oxxostudio', frame)     # 如果讀取成功，顯示該幀的畫面
+    if cv2.waitKey(1) == ord('q'):      # 每一毫秒更新一次，直到按下 q 結束
+        break
+cap.release()                           # 所有作業都完成後，釋放資源
+cv2.destroyAllWindows()                 # 結束所有視窗
+```
+
+讀取cctv
+``` python
+import cv2
+cap = cv2.VideoCapture('https://cctvn.freeway.gov.tw/abs2mjpg/bmjpg?camera=15771')
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()             # 讀取影片的每一幀
+    if not ret:
+        print("Cannot receive frame")   # 如果讀取錯誤，印出訊息
+        # 出現錯誤就再讀取一次，避免程式到此處就停止
+        cap = cv2.VideoCapture('https://cctvn.freeway.gov.tw/abs2mjpg/bmjpg?camera=15771')
+        continue
+    cv2.imshow('oxxostudio', frame)     # 如果讀取成功，顯示該幀的畫面
+    if cv2.waitKey(1) == ord('q'):      # 每一毫秒更新一次，直到按下 q 結束
+        break
+cap.release()                           # 所有作業都完成後，釋放資源
+cv2.destroyAllWindows()                 # 結束所有視窗
+``` 
 </details>
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h1>
+<h1>flip() 翻轉影像<h1>
 
 </summary>
+
+```python
+import cv2
+from matplotlib import pyplot as plt
+import matplotlib.image as img
+
+img = cv2.imread('lenna.jpg')   # 開啟圖片
+im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+output_0 = cv2.flip(im2, 0)    # 上下翻轉
+output_1 = cv2.flip(im2, 1)    # 左右翻轉
+output_2 = cv2.flip(im2, -1)   # 上下左右翻轉
+cv2.imwrite('lenna0.jpg', output_0)
+cv2.imwrite('lenna1.jpg', output_1)
+cv2.imwrite('lenna2.jpg', output_2)
+
+plt.figure(figsize=(8,8))
+
+plt.subplot(221)
+plt.imshow(im2)               # 顯示原圖
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(222)
+plt.imshow(output_0)
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(223)
+plt.imshow(output_1)
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(224)
+plt.imshow(output_2)
+plt.axis('off')     #不顯示座標尺寸
+
+plt.show()
+```
+
 
 </details>
 
