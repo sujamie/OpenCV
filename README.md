@@ -86,7 +86,19 @@ cv2.destroyAllWindows()        # 結束所有圖片視窗
     <td>不要根據 EXIF 資訊的方向標誌旋轉圖像</td>
   </tr>
 </table>
+不同模式  
+  
+``` python
+import cv2
+img = cv2.imread('lenna.jpg', cv2.IMREAD_GRAYSCALE)  # 使用 cv2.IMREAD_GRAYSCALE 模式
+# img = cv2.imread('meme.jpg', 2) # 也可使用數字代表模式
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+``` 
 
+
+  
 </details>
 
 <details>
