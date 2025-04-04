@@ -710,40 +710,131 @@ plt.axis('off')     #不顯示座標尺寸
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h1>
+<h1>影像邊緣偵測<h1>
 
 </summary>
+  <details>
+  <summary>
+  <h1>Laplacian()<h1>
+  
+  </summary>
+  cv2.Laplacian(img, ddepth, ksize, scale)  
+  
+  >img 來源影像
 
+  >ddepth 影像深度，設定 -1 表示使用圖片原本影像深度
+
+  >ksize 運算區域大小，預設 1 ( 必須是正奇數 )
+
+  >scale 縮放比例常數，預設 1 ( 必須是正奇數 )
+
+  ```python
+  import cv2
+  from matplotlib import pyplot as plt
+  img = cv2.imread('lenna.jpg')
+  im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+  img2 = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY)
+  img3 = cv2.medianBlur(img2, 7)                 # 模糊化，去除雜訊
+  output = cv2.Laplacian(img3, -1, 1, 5)        # 偵測邊緣
+  
+  plt.figure(figsize=(8,8))
+  
+  plt.subplot(3,2,1)
+  plt.imshow(im2, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(3,2,2)
+  plt.imshow(output, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  ```
+  >![](https://github.com/sujamie/OpenCV/blob/main/Laplacian.png)
+
+
+  </details>
+  
+  <details>
+  <summary>
+  <h1>Sobel()<h1>
+  
+  </summary>
+  cv2.Sobel(img, ddepth, dx, dy, ksize, scale)  
+  
+  >img 來源影像
+
+  >dx 針對 x 軸抓取邊緣
+
+  >dy 針對 y 軸抓取邊緣
+
+  >ddepth 影像深度，設定 -1 表示使用圖片原本影像深度
+
+  >ksize 運算區域大小，預設 1 ( 必須是正奇數 )
+
+  >scale 縮放比例常數，預設 1 ( 必須是正奇數 )
+
+  ```python
+  import cv2
+  from matplotlib import pyplot as plt
+  img = cv2.imread('lenna.jpg')
+  im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+  img2 = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY) # 轉成灰階
+   
+  img3 = cv2.medianBlur(img2, 7)                 # 模糊化，去除雜訊
+  output = cv2.Sobel(img3, -1, 1, 1, 1, 7)      # 偵測邊緣
+  
+  plt.figure(figsize=(8,8))
+  
+  plt.subplot(3,2,1)
+  plt.imshow(im2, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(3,2,2)
+  plt.imshow(output, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  ```
+
+  >![](https://github.com/sujamie/OpenCV/blob/main/Sobel.png)
+  
+  </details>
+  
+  <details>
+  <summary>
+  <h1>Canny()<h1>
+  
+  </summary>
+  cv2.Canny(img, threshold1, threshold2, apertureSize)  
+  
+  >img 來源影像
+
+  >threshold1 門檻值，範圍 0～255
+
+  >threshold2 門檻值，範圍 0～255
+
+  >apertureSize 計算梯度的 kernel size，預設 3
+
+  ```python
+  import cv2
+  from matplotlib import pyplot as plt
+  img = cv2.imread('lenna.jpg')
+  im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+  img2 = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY) # 轉成灰階
+  
+  img3 = cv2.medianBlur(img2, 7)                 # 模糊化，去除雜訊
+  output = cv2.Canny(img3, 36, 36)              # 偵測邊緣
+  
+  plt.figure(figsize=(8,8))
+  
+  plt.subplot(3,2,1)
+  plt.imshow(im2, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(3,2,2)
+  plt.imshow(output, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  ```
+
+  >![](https://github.com/sujamie/OpenCV/blob/main/Canny.png)
+  
+  </details>
 </details>
 
-<details>
-<summary>
-<h1>imread() 開啟圖片<h1>
 
-</summary>
-
-</details>
-
-<details>
-<summary>
-<h1>imread() 開啟圖片<h1>
-
-</summary>
-
-</details>
-
-<details>
-<summary>
-<h1>imread() 開啟圖片<h1>
-
-</summary>
-
-</details>
-
-<details>
-<summary>
-<h1>imread() 開啟圖片<h1>
-
-</summary>
-
-</details>
