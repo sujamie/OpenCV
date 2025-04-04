@@ -493,12 +493,256 @@ ret, output = cv2.threshold(img, thresh, maxval, type)
   </tr>
 </table>
 
+```python
+import cv2
+from matplotlib import pyplot as plt
+img = cv2.imread('lenna.jpg')
+#im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY); # 轉換前，都先將圖片轉換成灰階色彩
+ret, outputth1 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY)     # 如果大於 127 就等於 255，反之等於 0。
+ret, outputth2 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY_INV) # 如果大於 127 就等於 0，反之等於 255。
+ret, outputth3 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_TRUNC)      # 如果大於 127 就等於 127，反之數值不變。
+ret, outputth4 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_TOZERO)     # 如果大於 127 數值不變，反之數值等於 0。
+ret, outputth5 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_TOZERO_INV) # 如果大於 127 等於 0，反之數值不變。
+
+plt.figure(figsize=(8,8))
+
+plt.subplot(3,2,1)
+plt.imshow(img_gray, cmap='gray')              
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(3,2,2)
+plt.imshow(outputth1, cmap='gray')              
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(3,2,3)
+plt.imshow(outputth2, cmap='gray')
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(3,2,4)
+plt.imshow(outputth3, cmap='gray')
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(3,2,5)
+plt.imshow(outputth4, cmap='gray')
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(3,2,6)
+plt.imshow(outputth5, cmap='gray')
+plt.axis('off')     #不顯示座標尺寸
+```
+
+>![](https://github.com/sujamie/OpenCV/blob/main/threshold.png)
 
 </details>
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h2>
+<h1>adaptiveThreshold() 自適應二值化 <h1>
+
+</summary>
+
+
+
+cv2.adaptiveThreshold(img, maxValue, adaptiveMethod, thresholdType, blockSize, C)  
+
+>img 來源影像
+
+>maxValue 最大灰度，通常設定 255
+
+>adaptiveMethod 自適應二值化計算方法
+
+>thresholdType 二值化轉換方式
+
+>blockSize 轉換區域大小，通常設定 11
+
+>C 偏移量，通常設定 2
+
+```python
+import cv2
+from matplotlib import pyplot as plt
+img = cv2.imread('lenna.jpg')
+
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY); # 轉換前，都先將圖片轉換成灰階色彩
+
+ret, outputad1 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY)
+outputad2 = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
+outputad3 = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+
+plt.figure(figsize=(8,8))
+
+plt.subplot(2,2,1)
+plt.imshow(img_gray, cmap='gray')              
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(2,2,2)
+plt.imshow(outputad1, cmap='gray')              
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(2,2,3)
+plt.imshow(outputad2, cmap='gray')
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(2,2,4)
+plt.imshow(outputad3, cmap='gray')
+plt.axis('off')     #不顯示座標尺寸
+```
+
+>![](https://github.com/sujamie/OpenCV/blob/main/adaptiveThreshold.png)
+
+先模糊化後在二值化，可降低圖片雜訊
+
+```python
+import cv2
+from matplotlib import pyplot as plt
+img = cv2.imread('lenna.jpg')
+
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY); # 轉換前，都先將圖片轉換成灰階色彩
+img_gray2 = cv2.medianBlur(img_gray, 5);   # 模糊化
+ret, outputad1 = cv2.threshold(img_gray2, 127, 255, cv2.THRESH_BINARY)
+outputad2 = cv2.adaptiveThreshold(img_gray2, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
+outputad3 = cv2.adaptiveThreshold(img_gray2, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+
+plt.figure(figsize=(8,8))
+
+plt.subplot(2,2,1)
+plt.imshow(img_gray, cmap='gray')              
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(2,2,2)
+plt.imshow(outputad1, cmap='gray')              
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(2,2,3)
+plt.imshow(outputad2, cmap='gray')
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(2,2,4)
+plt.imshow(outputad3, cmap='gray')
+plt.axis('off')     #不顯示座標尺寸
+```
+>![](https://github.com/sujamie/OpenCV/blob/main/adaptiveThreshold2.png)
+
+</details>
+
+<details>
+<summary>
+<h1>影像的侵蝕與膨脹<h1>
+
+</summary>
+  <details>
+  <summary>
+  <h1>什麼是侵蝕 ( Erosion )？<h1>
+  
+  </summary>
+  當空間中有兩個集合 ( A 集合和 B 集合 )，當 A 集合的部分空間被 B 集合所取代，則稱之為「侵蝕 ( Erosion )」，通常進行侵蝕後的影像，黑色區域會擴張，白色區域會縮小。
+  </details>
+
+  <details>
+  <summary>
+  <h1>什麼是膨脹 ( Dilation )？<h1>
+  
+  </summary>
+  當空間中有兩個集合 ( A 集合和 B 集合 )，當 A 集合的部分空間擴張到 B 集合，則稱之為「膨脹 ( Dilation )」，通常進行膨脹後的影像，白色區域會擴張，黑色區域會縮小。
+  </details>
+  
+  <details>
+  <summary>
+  <h1>透過侵蝕與膨脹，去除影像中的雜訊<h1>
+  
+  </summary>
+  kernel = cv2.getStructuringElement(shape, ksize)  
+  
+  >返回指定大小形狀的結構元素
+
+  >shape 的內容：cv2.MORPH_RECT ( 矩形 )、cv2.MORPH_CROSS ( 十字交叉 )、cv2.MORPH_ELLIPSE ( 橢圓形 )
+
+  >ksize 的格式：(x, y)
+
+  >img = cv2.erode(img, kernel)   # 侵蝕
+
+  >img = cv2.dilate(img, kernel)  # 擴張
+  
+```python
+  import cv2
+  from matplotlib import pyplot as plt
+  img = cv2.imread('lenna.jpg')
+  im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+  img1 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
+  
+  img2 = cv2.dilate(img1, kernel)    # 膨脹
+  img3 = cv2.erode(img1, kernel)     # 侵蝕
+  img4 = cv2.erode(img2, kernel)     # 膨脹侵蝕
+  img5 = cv2.dilate(img3, kernel)     # 侵蝕膨脹
+  
+  plt.figure(figsize=(8,8))
+  
+  plt.subplot(3,2,1)
+  plt.imshow(im2, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(3,2,2)
+  plt.imshow(img1, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(3,2,3)
+  plt.imshow(img2, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(3,2,4)
+  plt.imshow(img3, cmap='gray')              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(3,2,5)
+  plt.imshow(img4, cmap='gray')
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(3,2,6)
+  plt.imshow(img5, cmap='gray')
+  plt.axis('off')     #不顯示座標尺寸
+  ```
+  </details>
+  >![](https://github.com/sujamie/OpenCV/blob/main/ED.png)
+  
+
+</details>
+
+<details>
+<summary>
+<h1>imread() 開啟圖片<h1>
+
+</summary>
+
+</details>
+
+<details>
+<summary>
+<h1>imread() 開啟圖片<h1>
+
+</summary>
+
+</details>
+
+<details>
+<summary>
+<h1>imread() 開啟圖片<h1>
+
+</summary>
+
+</details>
+
+<details>
+<summary>
+<h1>imread() 開啟圖片<h1>
+
+</summary>
+
+</details>
+
+<details>
+<summary>
+<h1>imread() 開啟圖片<h1>
 
 </summary>
 
