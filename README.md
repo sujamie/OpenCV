@@ -431,17 +431,68 @@ plt.show()
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h1>
+<h1>二值化黑白影像<h1>
 
 </summary>
+二值化是一種影像處理技術，其目的在於將影像的灰度值轉換為二進制的 0 或 1，以便進行後續的分析或處理。  
+
+二值化的原理是將影像的灰度值分為兩類，例如黑色和白色，而閾值 ( Threshold ) 則是用來決定哪些灰度值是黑色，哪些是白色。  
+
+二值化會根據「閾值」( 類似臨界值 ) 進行轉換，例如某個像素的灰度值大於閾值，則轉換為黑色，如果這個像素的灰度小於閾值則轉換為白色，進而實現二值化的轉換效果，經過二值化轉換的圖片，通常只會剩下黑和白兩個值。  
+
+許多影像辨識或影像處理的領域 ( 例如輪廓偵測、邊緣偵測...等 )，都會使用二值化影像進行運算，有些影像處理甚至會先將圖片二值化後，再進行後續的計算處理。  
 
 </details>
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h1>
+<h1>threshold() 產生黑白影像<h1>
 
-</summary>
+</summary>  
+
+ret, output = cv2.threshold(img, thresh, maxval, type)  
+
+>ret 是否成功轉換，成功會顯示閾值
+
+>output 轉換後的影像
+
+>img 來源影像
+
+>thresh 閾值，通常設定 127
+
+>maxval 最大灰度，通常設定 255
+
+>type 轉換方式
+
+
+<H6><table><H6>
+  <tr>
+    <td>轉換方式</td>
+    <td>說明</td>
+    
+  </tr>
+  <tr>
+    <td>cv2.THRESH_BINARY</td>
+    <td>如果大於 127 就等於 255，反之等於 0</td>
+  </tr>
+  <tr>
+    <td>cv2.THRESH_BINARY_INV</td>
+    <td>如果大於 127 就等於 0，反之等於 255</td>
+  </tr>
+  <tr>
+    <td>cv2.THRESH_TRUNC</td>
+    <td>如果大於 127 就等於 127，反之數值不變</td>
+  </tr>
+  <tr>
+    <td>cv2.THRESH_TOZERO</td>
+    <td>如果大於 127 數值不變，反之數值等於 0</td>
+  </tr>
+  <tr>
+    <td>cv2.THRESH_TOZERO_INV</td>
+    <td>如果大於 127 等於 0，反之數值不變</td>
+  </tr>
+</table>
+
 
 </details>
 
