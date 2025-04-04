@@ -13,23 +13,8 @@ cv2.waitKey(0)                 # 按下任意鍵停止
 cv2.destroyAllWindows()        # 結束所有圖片視窗
 ```
 <h1>色彩模式數字對照表<h1>
-	|數字	|模式	                          |說明|  
-  |-----|-------------------------------|--------------|  
-	|1	  |cv2.IMREAD_UNCHANGED	          |原本的圖像（ 如果圖像有 alpha 通道則會包含 )。|  
-	|2	  |cv2.IMREAD_GRAYSCALE	          |灰階圖像。|  
-	|3	  |cv2.IMREAD_COLOR	BGR           |彩色圖像。|  
-	|4	  |cv2.IMREAD_ANYDEPTH	          |具有對應的深度時返回 16/32 位元圖像，否則將其轉換為 8 位元圖像。|  
-	|5	  |cv2.IMREAD_ANYCOLOR	          |以任何可能的顏色格式讀取圖像。|  
-	|6	  |cv2.IMREAD_LOAD_GDAL	          |使用 gdal 驅動程式加載圖像。|  
-	|7	  |cv2.IMREAD_REDUCED_GRAYSCALE_2	|灰階圖像，圖像尺寸減小 1/2。|  
-	|8	  |cv2.IMREAD_REDUCED_COLOR_2	    |BGR 彩色圖像，圖像尺寸減小 1/2。|  
-	|9	  |cv2.IMREAD_REDUCED_GRAYSCALE_4	|灰階圖像，圖像尺寸縮小 1/4。|  
-	|10	  |cv2.IMREAD_REDUCED_COLOR_4	    |BGR 彩色圖像，圖像尺寸減小 1/4。|  
-	|11	  |cv2.IMREAD_REDUCED_GRAYSCALE_8	|灰階圖像，圖像尺寸縮小 1/8。|  
-	|12	  |cv2.IMREAD_REDUCED_COLOR_8	    |BGR 彩色圖像，圖像尺寸減小 1/8。|  
-	|13	  |cv2.IMREAD_IGNORE_ORIENTATION	|不要根據 EXIF 資訊的方向標誌旋轉圖像。|  
 
-<table>
+<H6><table><H6>
   <tr>
     <td>數字</td>
     <td>模式</td>
@@ -37,58 +22,68 @@ cv2.destroyAllWindows()        # 結束所有圖片視窗
   </tr>
   <tr>
     <td>1</td>
-    <td>iPhone 5</td>
-    <td>1</td>
+    <td>cv2.IMREAD_UNCHANGED</td>
+    <td>原本的圖像（ 如果圖像有 alpha 通道則會包含 )</td>
   </tr>
   <tr>
     <td>2</td>
-    <td>iPhone 5</td>
-    <td>2</td>
+    <td>cv2.IMREAD_GRAYSCALE</td>
+    <td>灰階圖像</td>
   </tr>
   <tr>
     <td>3</td>
-    <td>iPhone 5</td>
-    <td>3</td>
+    <td>cv2.IMREAD_COLOR</td>
+    <td>BGR彩色圖像</td>
   </tr>
   <tr>
     <td>4</td>
-    <td>iPhone 5</td>
-    <td>4</td>
+    <td>cv2.IMREAD_ANYDEPTH</td>
+    <td>具有對應的深度時返回 16/32 位元圖像，否則將其轉換為 8 位元圖像</td>
   </tr>
   <tr>
-    <td>1</td>
-    <td>iPhone 5</td>
-    <td>1</td>
+    <td>5</td>
+    <td>cv2.IMREAD_ANYCOLOR</td>
+    <td>以任何可能的顏色格式讀取圖像</td>
   </tr>
   <tr>
-    <td>1</td>
-    <td>iPhone 5</td>
-    <td>1</td>
+    <td>6</td>
+    <td>cv2.IMREAD_LOAD_GDAL</td>
+    <td>使用 gdal 驅動程式加載圖像</td>
   </tr>
   <tr>
-    <td>1</td>
-    <td>iPhone 5</td>
-    <td>1</td>
+    <td>7</td>
+    <td>cv2.IMREAD_REDUCED_GRAYSCALE_2</td>
+    <td>灰階圖像，圖像尺寸減小 1/2</td>
   </tr>
   <tr>
-    <td>1</td>
-    <td>iPhone 5</td>
-    <td>1</td>
+    <td>8</td>
+    <td>cv2.IMREAD_REDUCED_COLOR_2</td>
+    <td>BGR 彩色圖像，圖像尺寸減小 1/2</td>
   </tr>
   <tr>
-    <td>1</td>
-    <td>iPhone 5</td>
-    <td>1</td>
+    <td>9</td>
+    <td>cv2.IMREAD_REDUCED_GRAYSCALE_4</td>
+    <td>灰階圖像，圖像尺寸縮小 1/4</td>
   </tr>
   <tr>
-    <td>1</td>
-    <td>iPhone 5</td>
-    <td>1</td>
+    <td>10</td>
+    <td>cv2.IMREAD_REDUCED_COLOR_4</td>
+    <td>BGR 彩色圖像，圖像尺寸減小 1/4</td>
   </tr>
   <tr>
-    <td>1</td>
-    <td>iPhone 5</td>
-    <td>1</td>
+    <td>11</td>
+    <td>cv2.IMREAD_REDUCED_GRAYSCALE_8</td>
+    <td>灰階圖像，圖像尺寸縮小 1/8</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>cv2.IMREAD_REDUCED_COLOR_8</td>
+    <td>灰階圖像，圖像尺寸縮小 1/8</td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>cv2.IMREAD_IGNORE_ORIENTATION</td>
+    <td>不要根據 EXIF 資訊的方向標誌旋轉圖像</td>
   </tr>
 </table>
 
