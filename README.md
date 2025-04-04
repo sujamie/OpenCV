@@ -207,15 +207,58 @@ plt.axis('off')     #不顯示座標尺寸
 
 plt.show()
 ```
-
+>![](https://github.com/sujamie/OpenCV/blob/main/flip.png?raw=true) 
 
 </details>
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h1>
-
+<h1>rotate() 旋轉影像 <h1>  
+    
+rotate() 方法可以設定逆時針旋轉 90 度、順時針旋轉 90 度，以及旋轉 180 度。  
+  
 </summary>
+  
+```python
+import cv2
+from matplotlib import pyplot as plt
+import matplotlib.image as img
+
+
+img = cv2.imread('lenna.jpg')   # 開啟圖片
+im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+output_ROTATE_90_CLOCKWISE = cv2.rotate(im2, cv2.ROTATE_90_CLOCKWISE)
+output_ROTATE_90_COUNTERCLOCKWISE = cv2.rotate(im2, cv2.ROTATE_90_COUNTERCLOCKWISE)
+output_ROTATE_180 = cv2.rotate(im2, cv2.ROTATE_180)
+cv2.imwrite('output_1.jpg', output_ROTATE_90_CLOCKWISE)
+cv2.imwrite('output_2.jpg', output_ROTATE_90_COUNTERCLOCKWISE)
+cv2.imwrite('output_3.jpg', output_ROTATE_180)
+
+output_0 = cv2.imread('output_1.jpg')
+output_1 = cv2.imread('output_2.jpg')
+output_2 = cv2.imread('output_3.jpg')
+
+plt.figure(figsize=(8,8))
+
+plt.subplot(221)
+plt.imshow(im2)               # 顯示原圖
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(222)
+plt.imshow(output_0)
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(223)
+plt.imshow(output_1)
+plt.axis('off')     #不顯示座標尺寸
+
+plt.subplot(224)
+plt.imshow(output_2)
+plt.axis('off')     #不顯示座標尺寸
+
+plt.show()
+```
+>![](https://github.com/sujamie/OpenCV/blob/main/rotate.png)
 
 </details>
 
