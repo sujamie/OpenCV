@@ -214,11 +214,10 @@ plt.show()
 <details>
 <summary>
 <h1>rotate() 旋轉影像 <h1>  
-    
-rotate() 方法可以設定逆時針旋轉 90 度、順時針旋轉 90 度，以及旋轉 180 度。  
   
 </summary>
-  
+rotate() 方法可以設定逆時針旋轉 90 度、順時針旋轉 90 度，以及旋轉 180 度。  
+
 ```python
 import cv2
 from matplotlib import pyplot as plt
@@ -264,10 +263,170 @@ plt.show()
 
 <details>
 <summary>
-<h1>imread() 開啟圖片<h1>
-
+<h1>影像模糊化<h1>  
+  
 </summary>
+  <details>
+  <summary>
+  <h1>blur() 平均模糊<h1>  
+  </summary>
+    
+  cv2.blur(img, ksize)  
+  
+  >img 來源影像
+  
+  >ksize 指定區域單位
+  ```python
+  import cv2
+  from matplotlib import pyplot as plt
+  img = cv2.imread('lenna.jpg')
+  im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+  outputb1 = cv2.blur(im2, (5, 5))     # 指定區域單位為 (5, 5)
+  outputb2 = cv2.blur(im2, (25, 25))   # 指定區域單位為 (25, 25)
 
+  plt.figure(figsize=(8,8))
+
+  plt.subplot(2,2,1)
+  plt.imshow(im2)              
+  plt.axis('off')     #不顯示座標尺寸
+
+  plt.subplot(2,2,2)
+  plt.imshow(outputb1)              
+  plt.axis('off')     #不顯示座標尺寸
+
+  plt.subplot(2,2,3)
+  plt.imshow(outputb2)
+  plt.axis('off')     #不顯示座標尺寸
+  ```
+  >![](https://github.com/sujamie/OpenCV/blob/main/blur.png)
+  
+  </details>
+
+  <details>
+  <summary>
+  <h1>GaussianBlur() 高斯模糊<h1>
+
+  </summary>
+  
+  cv2.GaussianBlur(img, ksize, sigmaX, sigmaY)  
+  
+  >img 來源影像
+  
+  >ksize 指定區域單位 ( 必須是大於 1 的奇數 )
+
+  >sigmaX X 方向標準差，預設 0，sigmaY Y 方向標準差，預設 0
+
+  ```python
+  import cv2
+  from matplotlib import pyplot as plt
+
+  img = cv2.imread('lenna.jpg')
+  im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+  outputg1 = cv2.GaussianBlur(im2, (5, 5), 0)   # 指定區域單位為 (5, 5)
+  outputg2 = cv2.GaussianBlur(im2, (25, 25), 0) # 指定區域單位為 (25, 25)
+  plt.figure(figsize=(8,8))
+
+  plt.subplot(2,2,1)
+  plt.imshow(im2)              
+  plt.axis('off')     #不顯示座標尺寸
+
+  plt.subplot(2,2,2)
+  plt.imshow(outputg1)              
+  plt.axis('off')     #不顯示座標尺寸
+
+  plt.subplot(2,2,3)
+  plt.imshow(outputg2)
+  plt.axis('off')     #不顯示座標尺寸
+  ```
+
+  >![](https://github.com/sujamie/OpenCV/blob/main/GaussianBlur.png)
+  </details>
+
+  <details>
+  <summary>
+  <h1>medianBlur() 中值模糊<h1>
+
+  </summary>
+  cv2.medianBlur(img, ksize)  
+  
+  >img 來源影像
+  
+  >ksize 模糊程度 ( 必須是大於 1 的奇數 )
+
+  ```python
+  import cv2
+  from matplotlib import pyplot as plt
+  img = cv2.imread('lenna.jpg')
+  im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+  outputm1 = cv2.medianBlur(im2, 5)   # 模糊程度為 5
+  outputm2 = cv2.medianBlur(im2, 25)  # 模糊程度為 25
+
+  plt.figure(figsize=(8,8))
+
+  plt.subplot(2,2,1)
+  plt.imshow(im2)              
+  plt.axis('off')     #不顯示座標尺寸
+
+  plt.subplot(2,2,2)
+  plt.imshow(outputm1)              
+  plt.axis('off')     #不顯示座標尺寸
+
+  plt.subplot(2,2,3)
+  plt.imshow(outputm2)
+  plt.axis('off')     #不顯示座標尺寸
+  ```
+  >![](https://github.com/sujamie/OpenCV/blob/main/medianBlur.png)
+  
+  </details>
+
+  <details>
+  <summary>
+  <h1>bilateralFilter() 雙邊模糊<h1>
+
+  </summary>
+
+  cv2.bilateralFilter(img, d, sigmaColor, sigmaSpace)  
+  
+  >img 來源影像
+
+  >d 相鄰像素的直徑，預設使用 5，數值越大運算的速度越慢
+
+  >sigmaColor 相鄰像素的顏色混合，數值越大，會混合更多區域的顏色，並產生更大區塊的同一種顏色
+
+  >sigmaSpace 會影響像素的區域，數值越大，影響的範圍就越大，影響的像素就越多
+
+  ```python
+  import cv2
+  from matplotlib import pyplot as plt
+  img = cv2.imread('lenna.jpg')
+  im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+  
+  outputbi1 = cv2.bilateralFilter(im2, 50, 0, 0)
+  outputbi2 = cv2.bilateralFilter(im2, 50, 50, 100)
+  outputbi3 = cv2.bilateralFilter(im2, 50, 100, 1000)
+  
+  plt.figure(figsize=(8,8))
+  
+  plt.subplot(2,2,1)
+  plt.imshow(im2)              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(2,2,2)
+  plt.imshow(outputbi1)              
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(2,2,3)
+  plt.imshow(outputbi2)
+  plt.axis('off')     #不顯示座標尺寸
+  
+  plt.subplot(2,2,4)
+  plt.imshow(outputbi3)
+  plt.axis('off')     #不顯示座標尺寸
+  ```
+  >![](https://github.com/sujamie/OpenCV/blob/main/bilateralFilter.png)
+
+  </details>
+  
 </details>
 
 <details>
