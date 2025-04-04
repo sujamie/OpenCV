@@ -836,5 +836,5 @@ plt.axis('off')     #不顯示座標尺寸
   
   </details>
 </details>
-
+資料來源:(https://steam.oxxostudio.tw/category/python/ai/opencv-index.html)
 
