@@ -702,8 +702,9 @@ plt.axis('off')     #不顯示座標尺寸
   plt.imshow(img5, cmap='gray')
   plt.axis('off')     #不顯示座標尺寸
   ```
-  </details>
   >![](https://github.com/sujamie/OpenCV/blob/main/ED.png)
+  </details>
+  
   
 
 </details>
