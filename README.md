@@ -180,6 +180,7 @@ import matplotlib.image as img
 
 img = cv2.imread('lenna.jpg')   # 開啟圖片
 im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
+#im2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)# OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
 output_0 = cv2.flip(im2, 0)    # 上下翻轉
 output_1 = cv2.flip(im2, 1)    # 左右翻轉
 output_2 = cv2.flip(im2, -1)   # 上下左右翻轉
