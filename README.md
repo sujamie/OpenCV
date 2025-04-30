@@ -840,3 +840,16 @@ plt.axis('off')     #不顯示座標尺寸
 </details>
 資料來源:(https://steam.oxxostudio.tw/category/python/ai/opencv-index.html)
 
+<details>
+  <summary>
+  <h1>骨架提取，也叫二值影像細化<h1>
+  
+  </summary>
+</details>
+
+<details>
+  <summary>
+  <h1>直方圖均衡化<h1>
+  
+  </summary>
+</details>
