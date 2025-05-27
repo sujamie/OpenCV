@@ -880,5 +880,14 @@ Y軸為各像素值的數量
 
 >簡單來說在CLAHE中，限制了累積分佈函數的斜率，最後利用插值再不影響結果的情況下提高計算效率。  
 
+```python
+import numpy as np
+import cv2 as cv
+img = cv.imread('tsukuba_l.png',0)
+# create a CLAHE object (Arguments are optional).
+clahe = cv.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+cl1 = clahe.apply(img)
+cv.imwrite('clahe_2.jpg',cl1)
+```
 
 </details>
