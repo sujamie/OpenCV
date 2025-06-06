@@ -123,8 +123,8 @@ cv2.imwrite('oxxostudio_3.png', img)  # 存成 png
 
 </summary>
 cap = cv2.VideoCapture(0)         # 讀取攝影鏡頭
-  
-ap = cv2.VideoCapture('影片路徑') # 讀取電腦中的影片
+
+cap = cv2.VideoCapture('影片路徑') # 讀取電腦中的影片
 
 ``` python
 import cv2
@@ -499,8 +499,7 @@ import cv2
 from matplotlib import pyplot as plt
 img = cv2.imread('lenna.jpg')
 #im2 = img[:,:,::-1] # OpenCV 讀取的圖片是 BGR 順序，轉換成 RGB 順序
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY); # 轉換前，都先將圖片轉換成灰階色彩
-ret, outputth1 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY)     # 如果大於 127 就等於 255，反之等於 0。
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換前，都先將圖片轉換成灰階色彩
 ret, outputth2 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY_INV) # 如果大於 127 就等於 0，反之等於 255。
 ret, outputth3 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_TRUNC)      # 如果大於 127 就等於 127，反之數值不變。
 ret, outputth4 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_TOZERO)     # 如果大於 127 數值不變，反之數值等於 0。
@@ -564,8 +563,7 @@ import cv2
 from matplotlib import pyplot as plt
 img = cv2.imread('lenna.jpg')
 
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY); # 轉換前，都先將圖片轉換成灰階色彩
-
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換前，都先將圖片轉換成灰階色彩
 ret, outputad1 = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY)
 outputad2 = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
 outputad3 = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
@@ -597,10 +595,8 @@ plt.axis('off')     #不顯示座標尺寸
 import cv2
 from matplotlib import pyplot as plt
 img = cv2.imread('lenna.jpg')
-
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY); # 轉換前，都先將圖片轉換成灰階色彩
-img_gray2 = cv2.medianBlur(img_gray, 5);   # 模糊化
-ret, outputad1 = cv2.threshold(img_gray2, 127, 255, cv2.THRESH_BINARY)
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換前，都先將圖片轉換成灰階色彩
+img_gray2 = cv2.medianBlur(img_gray, 5)   # 模糊化
 outputad2 = cv2.adaptiveThreshold(img_gray2, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
 outputad3 = cv2.adaptiveThreshold(img_gray2, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
